@@ -14,7 +14,50 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@angular-experiment-provided-in/shared/provided-in-root-lib": [
+        "libs/shared/provided-in-root-lib/src/index.ts"
+      ],
+      "@angular-experiment-provided-in/shared/provided-in-module-lib": [
+        "libs/shared/provided-in-module-lib/src/index.ts"
+      ],
+      "@angular-experiment-provided-in/in-root-app/page1": [
+        "libs/in-root-app/page1/src/index.ts"
+      ],
+      "@angular-experiment-provided-in/in-root-app/page2": [
+        "libs/in-root-app/page2/src/index.ts"
+      ],
+      "@angular-experiment-provided-in/in-module-app/page2": [
+        "libs/in-module-app/page2/src/index.ts"
+      ],
+      "@angular-experiment-provided-in/in-module-app/page1": [
+        "libs/in-module-app/page1/src/index.ts"
+      ],
+      "@angular-experiment-provided-in/provided-in-root-app/page3": [
+        "libs/provided-in-root-app/page3/src/index.ts"
+      ],
+      "@angular-experiment-provided-in/provided-in-module-app/page3": [
+        "libs/provided-in-module-app/page3/src/index.ts"
+      ],
+      "@angular-experiment-provided-in/in-module-app/page3": [
+        "libs/in-module-app/page3/src/index.ts"
+      ],
+      "@angular-experiment-provided-in/in-root-app/page3": [
+        "libs/in-root-app/page3/src/index.ts"
+      ],
+      "@angular-experiment-provided-in/shared/provided-in-module2-lib": [
+        "libs/shared/provided-in-module2-lib/src/index.ts"
+      ],
+      "@angular-experiment-provided-in/shared/provided-in-root2-lib": [
+        "libs/shared/provided-in-root2-lib/src/index.ts"
+      ],
+      "@angular-experiment-provided-in/shared/provided-in-root3-lib": [
+        "libs/shared/provided-in-root3-lib/src/index.ts"
+      ],
+      "@angular-experiment-provided-in/shared/provided-in-module3-lib": [
+        "libs/shared/provided-in-module3-lib/src/index.ts"
+      ]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }

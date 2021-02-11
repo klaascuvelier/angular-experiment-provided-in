@@ -17,9 +17,18 @@
   },
   "projects": {
     "provided-in-root-app": { "tags": [] },
-    "provided-in-root-app-e2e": {
-      "tags": [],
-      "implicitDependencies": ["provided-in-root-app"]
-    }
+    "provided-in-module-app": { "tags": [] },
+    "shared-provided-in-root-lib": { "tags": [] },
+    "shared-provided-in-module-lib": { "tags": [] },
+    "in-root-app-page1": { "tags": [] },
+    "in-root-app-page2": { "tags": [] },
+    "in-module-app-page2": { "tags": [] },
+    "in-module-app-page1": { "tags": [] },
+    "in-module-app-page3": { "tags": [] },
+    "in-root-app-page3": { "tags": [] },
+    "shared-provided-in-module2-lib": { "tags": [] },
+    "shared-provided-in-root2-lib": { "tags": [] },
+    "shared-provided-in-root3-lib": { "tags": [] },
+    "shared-provided-in-module3-lib": { "tags": [] }
   }
 }

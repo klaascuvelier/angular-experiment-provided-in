@@ -120,28 +120,438 @@
         }
       }
     },
-    "provided-in-root-app-e2e": {
-      "root": "apps/provided-in-root-app-e2e",
-      "sourceRoot": "apps/provided-in-root-app-e2e/src",
+    "provided-in-module-app": {
       "projectType": "application",
+      "root": "apps/provided-in-module-app",
+      "sourceRoot": "apps/provided-in-module-app/src",
+      "prefix": "angular-experiment-provided-in",
       "architect": {
-        "e2e": {
-          "builder": "@nrwl/cypress:cypress",
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "cypressConfig": "apps/provided-in-root-app-e2e/cypress.json",
-            "tsConfig": "apps/provided-in-root-app-e2e/tsconfig.e2e.json",
-            "devServerTarget": "provided-in-root-app:serve"
+            "outputPath": "dist/apps/provided-in-module-app",
+            "index": "apps/provided-in-module-app/src/index.html",
+            "main": "apps/provided-in-module-app/src/main.ts",
+            "polyfills": "apps/provided-in-module-app/src/polyfills.ts",
+            "tsConfig": "apps/provided-in-module-app/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "apps/provided-in-module-app/src/favicon.ico",
+              "apps/provided-in-module-app/src/assets"
+            ],
+            "styles": ["apps/provided-in-module-app/src/styles.scss"],
+            "scripts": []
           },
           "configurations": {
             "production": {
-              "devServerTarget": "provided-in-root-app:serve:production"
+              "fileReplacements": [
+                {
+                  "replace": "apps/provided-in-module-app/src/environments/environment.ts",
+                  "with": "apps/provided-in-module-app/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "provided-in-module-app:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "provided-in-module-app:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "provided-in-module-app:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/provided-in-module-app/src/**/*.ts",
+              "apps/provided-in-module-app/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/provided-in-module-app"],
+          "options": {
+            "jestConfig": "apps/provided-in-module-app/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "shared-provided-in-root-lib": {
+      "projectType": "library",
+      "root": "libs/shared/provided-in-root-lib",
+      "sourceRoot": "libs/shared/provided-in-root-lib/src",
+      "prefix": "angular-experiment-provided-in",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/shared/provided-in-root-lib/src/**/*.ts",
+              "libs/shared/provided-in-root-lib/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/shared/provided-in-root-lib"],
+          "options": {
+            "jestConfig": "libs/shared/provided-in-root-lib/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "shared-provided-in-module-lib": {
+      "projectType": "library",
+      "root": "libs/shared/provided-in-module-lib",
+      "sourceRoot": "libs/shared/provided-in-module-lib/src",
+      "prefix": "angular-experiment-provided-in",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/shared/provided-in-module-lib/src/**/*.ts",
+              "libs/shared/provided-in-module-lib/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/shared/provided-in-module-lib"],
+          "options": {
+            "jestConfig": "libs/shared/provided-in-module-lib/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "in-root-app-page1": {
+      "projectType": "library",
+      "root": "libs/in-root-app/page1",
+      "sourceRoot": "libs/in-root-app/page1/src",
+      "prefix": "angular-experiment-provided-in",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:ng-packagr-lite",
+          "options": {
+            "tsConfig": "libs/in-root-app/page1/tsconfig.lib.json",
+            "project": "libs/in-root-app/page1/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/in-root-app/page1/tsconfig.lib.prod.json"
             }
           }
         },
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["apps/provided-in-root-app-e2e/**/*.{js,ts}"]
+            "lintFilePatterns": [
+              "libs/in-root-app/page1/src/**/*.ts",
+              "libs/in-root-app/page1/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/in-root-app/page1"],
+          "options": {
+            "jestConfig": "libs/in-root-app/page1/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "in-root-app-page2": {
+      "projectType": "library",
+      "root": "libs/in-root-app/page2",
+      "sourceRoot": "libs/in-root-app/page2/src",
+      "prefix": "angular-experiment-provided-in",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:ng-packagr-lite",
+          "options": {
+            "tsConfig": "libs/in-root-app/page2/tsconfig.lib.json",
+            "project": "libs/in-root-app/page2/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/in-root-app/page2/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/in-root-app/page2/src/**/*.ts",
+              "libs/in-root-app/page2/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/in-root-app/page2"],
+          "options": {
+            "jestConfig": "libs/in-root-app/page2/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "in-module-app-page2": {
+      "projectType": "library",
+      "root": "libs/in-module-app/page2",
+      "sourceRoot": "libs/in-module-app/page2/src",
+      "prefix": "angular-experiment-provided-in",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:ng-packagr-lite",
+          "options": {
+            "tsConfig": "libs/in-module-app/page2/tsconfig.lib.json",
+            "project": "libs/in-module-app/page2/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/in-module-app/page2/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/in-module-app/page2/src/**/*.ts",
+              "libs/in-module-app/page2/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/in-module-app/page2"],
+          "options": {
+            "jestConfig": "libs/in-module-app/page2/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "in-module-app-page1": {
+      "projectType": "library",
+      "root": "libs/in-module-app/page1",
+      "sourceRoot": "libs/in-module-app/page1/src",
+      "prefix": "angular-experiment-provided-in",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:ng-packagr-lite",
+          "options": {
+            "tsConfig": "libs/in-module-app/page1/tsconfig.lib.json",
+            "project": "libs/in-module-app/page1/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "libs/in-module-app/page1/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/in-module-app/page1/src/**/*.ts",
+              "libs/in-module-app/page1/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/in-module-app/page1"],
+          "options": {
+            "jestConfig": "libs/in-module-app/page1/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "in-module-app-page3": {
+      "projectType": "library",
+      "root": "libs/in-module-app/page3",
+      "sourceRoot": "libs/in-module-app/page3/src",
+      "prefix": "angular-experiment-provided-in",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/in-module-app/page3/src/**/*.ts",
+              "libs/in-module-app/page3/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/in-module-app/page3"],
+          "options": {
+            "jestConfig": "libs/in-module-app/page3/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "in-root-app-page3": {
+      "projectType": "library",
+      "root": "libs/in-root-app/page3",
+      "sourceRoot": "libs/in-root-app/page3/src",
+      "prefix": "angular-experiment-provided-in",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/in-root-app/page3/src/**/*.ts",
+              "libs/in-root-app/page3/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/in-root-app/page3"],
+          "options": {
+            "jestConfig": "libs/in-root-app/page3/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "shared-provided-in-module2-lib": {
+      "projectType": "library",
+      "root": "libs/shared/provided-in-module2-lib",
+      "sourceRoot": "libs/shared/provided-in-module2-lib/src",
+      "prefix": "angular-experiment-provided-in",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/shared/provided-in-module2-lib/src/**/*.ts",
+              "libs/shared/provided-in-module2-lib/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/shared/provided-in-module2-lib"],
+          "options": {
+            "jestConfig": "libs/shared/provided-in-module2-lib/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "shared-provided-in-root2-lib": {
+      "projectType": "library",
+      "root": "libs/shared/provided-in-root2-lib",
+      "sourceRoot": "libs/shared/provided-in-root2-lib/src",
+      "prefix": "angular-experiment-provided-in",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/shared/provided-in-root2-lib/src/**/*.ts",
+              "libs/shared/provided-in-root2-lib/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/shared/provided-in-root2-lib"],
+          "options": {
+            "jestConfig": "libs/shared/provided-in-root2-lib/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "shared-provided-in-root3-lib": {
+      "projectType": "library",
+      "root": "libs/shared/provided-in-root3-lib",
+      "sourceRoot": "libs/shared/provided-in-root3-lib/src",
+      "prefix": "angular-experiment-provided-in",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/shared/provided-in-root3-lib/src/**/*.ts",
+              "libs/shared/provided-in-root3-lib/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/shared/provided-in-root3-lib"],
+          "options": {
+            "jestConfig": "libs/shared/provided-in-root3-lib/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "shared-provided-in-module3-lib": {
+      "projectType": "library",
+      "root": "libs/shared/provided-in-module3-lib",
+      "sourceRoot": "libs/shared/provided-in-module3-lib/src",
+      "prefix": "angular-experiment-provided-in",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/shared/provided-in-module3-lib/src/**/*.ts",
+              "libs/shared/provided-in-module3-lib/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/shared/provided-in-module3-lib"],
+          "options": {
+            "jestConfig": "libs/shared/provided-in-module3-lib/jest.config.js",
+            "passWithNoTests": true
           }
         }
       }
